@@ -27,5 +27,8 @@ public class Airplane : MonoBehaviour
         {
             rb.AddForce(transform.forward * enginePower);
         }
+
+        Vector3 lift = Vector3.Project(rb.linearVelocity, transform.forward);
+        rb.AddForce(transform.up * lift.magnitude * liftBooster);
     }
 }
