@@ -30,5 +30,16 @@ public class Airplane : MonoBehaviour
 
         Vector3 lift = Vector3.Project(rb.linearVelocity, transform.forward);
         rb.AddForce(transform.up * lift.magnitude * liftBooster);
+
+        rb.linearDamping = rb.linearVelocity.magnitude * drag;
+        rb.angularDamping = rb.linearVelocity.magnitude * angularDrag;
+
+        float yaw = Input.GetAxis("Horizontal");
+        float pitch = Input.GetAxis("Vertical");
+        float roll = Input.GetAxis("Roll");
+
+        rb.AddTorque(transform.up * yaw);
+        rb.AddTorque(transform.right * pitch);
+        rb.AddTorque(transform.forward *  roll);
     }
 }
